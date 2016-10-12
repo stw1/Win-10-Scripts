@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UseConfigurationSet>true</UseConfigurationSet>
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+        <FullName>Stanford GSE</FullName>
+        <Organization>Stanford GSE</Organization>
+      </UserData>
+      <ImageInstall>
+        <OSImage>
+          <InstallToAvailablePartition>true</InstallToAvailablePartition>
+        </OSImage>
+      </ImageInstall>
+    </component>
+    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UILanguage>en-US</UILanguage>
+      <SetupUILanguage>
+        <UILanguage>en-US</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>en-us</InputLocale>
+      <SystemLocale>en-us</SystemLocale>
+      <UserLocale>en-us</UserLocale>
+    </component>
+  </settings>
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <RegisteredOwner>Stanford GSE</RegisteredOwner>
+      <RegisteredOrganization>Stanford GSE</RegisteredOrganization>
+      <TimeZone>Pacific Standard Time</TimeZone>
+      <AutoLogon>
+        <Enabled>true</Enabled>
+        <Username>gseadmin</Username>
+        <Password>
+          <PlainText>true</PlainText>
+          <Value>1Tn00bs.</Value>
+        </Password>
+        <LogonCount>1</LogonCount>
+      </AutoLogon>
+      <ComputerName>*</ComputerName>
+    </component>
+    <component name="Microsoft-Windows-UnattendedJoin" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <Identification>
+        <JoinWorkgroup>WORKGROUP</JoinWorkgroup>
+      </Identification>
+    </component>
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <RunSynchronous>
+        <RunSynchronousCommand wcm:action="add">
+          <Path>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\FirstNetwork" /v Category /t REG_DWORD /d 00000000 /f</Path>
+          <Description>Setting Network Location</Description>
+          <Order>1</Order>
+          <WillReboot>OnRequest</WillReboot>
+        </RunSynchronousCommand>
+      </RunSynchronous>
+    </component>
+  </settings>
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <NetworkLocation>Work</NetworkLocation>
+        <SkipMachineOOBE>false</SkipMachineOOBE>
+        <SkipUserOOBE>false</SkipUserOOBE>
+        <ProtectYourPC>1</ProtectYourPC>
+      </OOBE>
+      <DesktopOptimization>
+        <GoToDesktopOnSignIn>true</GoToDesktopOnSignIn>
+        <ShowWindowsStoreAppsOnTaskbar>false</ShowWindowsStoreAppsOnTaskbar>
+      </DesktopOptimization>
+      <UserAccounts>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Name>gseadmin</Name>
+            <Group>Administrators</Group>
+            <Password>
+              <Value>password</Value>
+              <PlainText>true</PlainText>
+            </Password>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+    </component>
+    <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <InputLocale>en-us</InputLocale>
+      <SystemLocale>en-us</SystemLocale>
+      <UILanguage>en-us</UILanguage>
+      <UserLocale>en-us</UserLocale>
+    </component>
+  </settings>
+</unattend>
